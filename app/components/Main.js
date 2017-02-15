@@ -1,8 +1,8 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var CounterDisplay = React.createClass({
-  render: function () {
+class CounterDisplay extends React.Component{
+  render() {
     return (
       <div>
         <div>{this.props.counterProp}</div>
@@ -11,24 +11,31 @@ var CounterDisplay = React.createClass({
       </div>
     );
   }
-})
 
-var Counter = React.createClass({
-  getInitialState: function () {
-    return {
+  propTypes: {
+    counterProp: React.PropTypes.number.isRequired,
+    incrementCounter: React.PropTypes.func.isRequired,
+    decrementCounter: React.PropTypes.func.isRequired
+  }
+}
+
+class Counter extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
       counter: 0
     }
-  },
+  }
 
-  handleIncrement: function () {
+  handleIncrement() {
     this.setState({counter: this.state.counter + 1});
-  },
+  }
 
-  handleDecrement: function() {
+  handleDecrement() {
     this.setState({counter: this.state.counter - 1});
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <div>
         <h2>{this.props.name}</h2>
@@ -40,6 +47,6 @@ var Counter = React.createClass({
       </div>
     );
   }
-});
+};
 
 ReactDOM.render(<Counter name="Counter Display" />, document.getElementById('app'));
